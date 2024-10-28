@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const prompt = require('prompt-sync')();
+    
+        // Stała dla komunikatu błędu (Zasada 4)
+        const ERROR_DIVIDE_BY_ZERO = "Nie można dzielić przez zero!";
+    
+        // Funkcja dla każdego działania (Zasady 1, 2)
+        function add(a, b) {
+            return a + b;
+        }
+    
+        function subtract(a, b) {
+            return a - b;
+        }
+    
+        function multiply(a, b) {
+            return a * b;
+        }
+    
+        function divide(a, b) {
+            if (b === 0) {
+                console.log(ERROR_DIVIDE_BY_ZERO);
+                return null;
+            }
+            return a / b;
+        }
+    
+        // Funkcja obsługująca wybranie operacji (Zasady 2, 3)
+        function calculate(operation, number1, number2) {
+            switch (operation) {
+                case '+': return add(number1, number2);
+                case '-': return subtract(number1, number2);
+                case '*': return multiply(number1, number2);
+                case '/': return divide(number1, number2);
+                default:
+                    console.log("Nieznana operacja");
+                    return null;
+            }
+        }
+    
+        // Główna funkcja obsługująca interakcję z użytkownikiem (Zasada 5)
+        function main() {
+            const number1 = parseFloat(prompt("Podaj liczbę pierwszą: "));
+            const number2 = parseFloat(prompt("Podaj liczbę drugą: "));
+            const operation = prompt("Podaj operator (+, -, *, /): ");
+            
+            const result = calculate(operation, number1, number2);
+            if (result !== null) {
+                console.log("Wynik: " + result);
+            }
+        }
+    
+        // Uruchomienie programu
+        main();
+    </script>
+</body>
+</html>
