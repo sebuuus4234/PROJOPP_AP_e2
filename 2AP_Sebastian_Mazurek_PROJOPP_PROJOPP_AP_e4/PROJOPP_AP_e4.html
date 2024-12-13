@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000;
+        }
+        .calculator {
+            background: #333;
+            padding: 20px;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            width: 340px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .display {
+            width: calc(100% - 20px);
+            height: 70px;
+            background: #000;
+            border: none;
+            border-radius: 20px;
+            font-size: 2em;
+            color: #fff;
+            text-align: right;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        button {
+            height: 70px;
+            width: 70px;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 50%;
+            background: #505050;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.1s;
+        }
+        button:hover {
+            background: #606060;
+            transform: scale(1.05);
+        }
+        button.operator {
+            background: #f39c12;
+        }
+        button.operator:hover {
+            background: #d4880b;
+        }
+        button.clear {
+            background: #e74c3c;
+        }
+        button.clear:hover {
+            background: #c0392b;
+        }
+        button.equal {
+            background: #27ae60;
+            color: white;
+            grid-column: span 4;
+            width: 320px;
+        }
+        button.equal:hover {
+            background: #1e8449;
+            width: 320px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" class="display" id="display" disabled>
+        <div class="buttons">
+            <button onclick="appendValue('7')">7</button>
+            <button onclick="appendValue('8')">8</button>
+            <button onclick="appendValue('9')">9</button>
+            <button class="operator" onclick="appendValue('/')">&divide;</button>
+
+            <button onclick="appendValue('4')">4</button>
+            <button onclick="appendValue('5')">5</button>
+            <button onclick="appendValue('6')">6</button>
+            <button class="operator" onclick="appendValue('*')">&times;</button>
+
+            <button onclick="appendValue('1')">1</button>
+            <button onclick="appendValue('2')">2</button>
+            <button onclick="appendValue('3')">3</button>
+            <button class="operator" onclick="appendValue('-')">&minus;</button>
+
+            <button onclick="appendValue('0')">0</button>
+            <button onclick="appendValue('.')">.</button>
+            <button class="clear" onclick="clearDisplay()">C</button>
+            <button class="operator" onclick="appendValue('+')">&plus;</button>
+
+            <button class="equal" onclick="calculateResult()">=</button>
+        </div>
+    </div>
+
+    <script>
+        function appendValue(value) {
+            const display = document.getElementById('display');
+            display.value += value;
+        }
+
+        function clearDisplay() {
+            const display = document.getElementById('display');
+            display.value = '';
+        }
+
+        function calculateResult() {
+            const display = document.getElementById('display');
+            try {
+                display.value = eval(display.value);
+            } catch (error) {
+                display.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
